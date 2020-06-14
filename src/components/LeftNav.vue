@@ -47,15 +47,18 @@
         <div class="separator"></div>
 
         <div class="new-playlist">
-            <!-- <img height="15px" width="15px" src="../assets/add.png"> -->
-            <div>+ New Playlist</div>
+            <img height="25px" width="25px" src="../assets/add.png">
+            <div>New Playlist</div>
         </div>
 
-        <img class="album-art-img" src="../assets/kanye1.jpg">
-        
-        <!-- <div class="album-art">
-            
-        </div> -->
+        <div class="preview" @mouseover="onAlbum = true" @mouseleave="onAlbum = false" :class="{ 'hidden' : albumHidden}">
+            <img class="album-art-img" src="../assets/kanye1.jpg">
+            <div class="overlay" v-if="onAlbum">
+                <div class="middle" v-on:click="hideArt()" v-if="!albumHidden">
+                    <img class="down-arrow" src="../assets/arrowup.png">
+                </div>
+            </div>
+        </div>
 
     </div>
   </div>
@@ -66,7 +69,9 @@ export default {
     name: 'LeftNav',
     data: function() {
         return {
-            activeIndex: 0
+            activeIndex: 0,
+            onAlbum: false,
+            albumHidden: false
         }
     },
     methods: {
@@ -75,7 +80,16 @@ export default {
         },
         options(){
             console.log('options');
+        },
+        hideArt(){
+            this.albumHidden = true;
+            this.$root.$emit('hideArt');
         }
+    },
+    mounted() {
+        this.$root.$on('showArt', () => {
+            this.albumHidden = false;
+        });
     }
 }
 </script>
@@ -121,7 +135,7 @@ export default {
     }
 
     .main-nav-section:hover {
-        filter: brightness(1);
+        filter: brightness(0.8);
     }
 
     .current-selection {
@@ -179,22 +193,29 @@ export default {
     }
 
     .section-listing:hover {
-        color: white;
+        color: rgb(202, 202, 202);
     }
 
     .new-playlist {
-        height: 100px;
+        max-height: 100px;
         text-align: center;
-        /* background-color: rebeccapurple; */
         display: flex;
-        justify-content: center;
+        padding-left: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         align-items: center;
+        font-size: 0.9em;
         cursor: pointer;
-        color: rgb(150, 150, 150);
+        color: rgb(255, 255, 255);
+        filter: opacity(0.5);
     }
 
     .new-playlist:hover {
-        color: white;
+        filter: opacity(0.8);
+    }
+
+    .new-playlist img {
+        margin-right: 5px;
     }
 
     .new-playlist div {
@@ -204,6 +225,8 @@ export default {
 
     .album-art-img {
         width: 100%;
+        height: 200px;
+        transition: 0.2s ease-out;
     }
 
     .separator {
@@ -220,6 +243,89 @@ export default {
         background: rgb(88, 88, 88);
     }
 
+    .preview {
+        min-height: 200px;
+        height: 200px;
+        display: grid;
+        transition: 0.2s ease-out;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .hidden {
+        min-height: 0px;
+        height: 0px;
+    }
+
+    .preview img {
+        grid-area: 1 / 1 / 4 / 2;
+    }
+
+    .overlay {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 100%;
+        height: 200px;
+        z-index: 2;
+        text-align: right;
+        animation: fadein 0.5s;
+        -moz-animation: fadein 0.5s;
+        -webkit-animation: fadein 0.5s;
+        -o-animation: fadein 0.5s;
+    }
+
+    .middle {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .down-arrow {
+        background-color: rgba(0, 0, 0, 0.541);
+        border-radius: 25px;
+        padding: 5px;
+        padding-top: 4px;
+        margin: 5px;
+        transform: rotate(180deg);
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+
+    @-moz-keyframes fadein {
+        /* Firefox */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    @-webkit-keyframes fadein {
+        /* Safari and Chrome */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    @-o-keyframes fadein {
+        /* Opera */
+        from {
+            opacity:0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
    
 
 </style>

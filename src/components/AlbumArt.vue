@@ -1,7 +1,7 @@
 <template>
-  <div :class="{ 'first' : first }" class="container">
+  <div :class="{ 'first' : first }" class="container-album">
       <div class="art" @mouseover="overAlbum()" @mouseleave="leaveAlbum()">
-        <img :class="{ 'greyed' : onAlbum }" :src="require(`@/assets/${art}`)">
+        <img :class="{ 'greyed' : onAlbum , 'artist' : artist }" :src="require(`@/assets/${art}`)">
         <div v-if="onAlbum" class="more-info"> 
             <div class="middle">
                 <img id="heart" src="../assets/heart.png">
@@ -9,10 +9,12 @@
             <div class="middle">
                 <img id="play" src="../assets/play.png">
             </div>
-            <div class="middle">...</div>
+            <div class="middle">
+                <img id="ellipses" src="../assets/ellipses.png">
+            </div>
         </div>
       </div>
-      <a href="#" class="title">{{ title }}</a>
+      <a href="#" class="title" :class="{ 'centered' : artist }" >{{ title }}</a>
       <div class="description">{{ description }}</div>
   </div>
 </template>
@@ -25,7 +27,8 @@ export default {
         title: String,
         description: String,
         art: String,
-        first: Boolean
+        first: Boolean,
+        artist: Boolean
     },
     data: function() {
         return {
@@ -50,11 +53,15 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+    .container-album {
         display: flex;
         flex-direction: column;
         flex: 0 0 190px;
         padding: 10px;
+    }
+
+    .artist {
+        border-radius: 50%;
     }
 
     .first {
@@ -63,12 +70,14 @@ export default {
 
     .container img {
         width: 190px;
+        /* height: 190px; */
+        object-fit: cover;
     }
 
     .title {
         font-weight: bold;
         letter-spacing: 0.8px;
-        margin-top: 10px;
+        margin-top: 12px;
         margin-bottom: 3px;
     }
 
@@ -80,6 +89,10 @@ export default {
     a {
         color: white;
         text-decoration: none;
+    }
+
+    .centered {
+        text-align: center;
     }
 
     a:hover {
@@ -129,6 +142,20 @@ export default {
 
     #heart {
         width: 30px;
+        filter: brightness(0.6);
+    }
+
+    #heart:hover {
+        filter: brightness(1);
+    }
+
+    #ellipses {
+        width: 30px;
+        filter: brightness(0.6);
+    }
+
+    #ellipses:hover {
+        filter: brightness(1);
     }
 
 </style>

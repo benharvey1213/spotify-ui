@@ -36,6 +36,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  /* -webkit-font-smoothing: antialiased; */
 }
 
 /* #app { -webkit-font-smoothing: antialiased;
