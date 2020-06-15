@@ -70,11 +70,11 @@ export default {
 
     .container img {
         width: 190px;
-        /* height: 190px; */
         object-fit: cover;
     }
 
     .title {
+        font-size: 0.95em;
         font-weight: bold;
         letter-spacing: 0.8px;
         margin-top: 12px;
@@ -115,7 +115,6 @@ export default {
         grid-area: 1 / 1 / 2 / 2;
         width: 100%;
         height: 190px;
-        /* background-color: green; */
         color: white;
         z-index: 2;
         text-align: center;

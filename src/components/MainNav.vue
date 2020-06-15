@@ -1,22 +1,29 @@
 <template>
   <div class="container">
       <div class="top-nav">
-          <img class="arrow-left" height="20px" width="20px" src="../assets/arrowup.png">
-          <img class="arrow-right" height="20px" width="20px" src="../assets/arrowup.png">
+          <img class="menu" height="25px" width="25px" src="../assets/menu.png" v-on:click="togglePopout()">
+
+          <img class="arrow-left nav-left" height="20px" width="20px" src="../assets/arrowup.png">
+          <img class="arrow-right nav-right" height="20px" width="20px" src="../assets/arrowup.png">
+
           <div>
               <input type="text" placeholder="Search">
           </div>
           <div class="expanded"></div>
-          <img height="20px" width="20px" src="../assets/profile.png">
+          <img class="profile" height="20px" width="20px" src="../assets/profile.png">
           <div class="username">
               <div>ben.harvey1213</div>
           </div>
-          <img class="arrow-down" height="20px" width="20px" src="../assets/arrowup.png">
+          <img class="arrow-down profile-arrow" height="20px" width="20px" src="../assets/arrowup.png">
       </div>
       <div class="scrollable">
 
+        <div class="title">
+            <div class="title-inner">Home</div>
+        </div>
+
         <div class="side-padding">
-            <div class="title">Home</div>
+            
             
             <div class="subheading-with-nav">
                 <div class="subheading">Best Kanye albums</div>
@@ -97,6 +104,11 @@ export default {
     components: {
         AlbumArt
     },
+    // data: function() {
+    //     return {
+    //         popoutToggled: false
+    //     }
+    // },
     methods: {
         scrollLeft(id){
             var scrollElem = document.getElementById('albums' + id);
@@ -105,6 +117,10 @@ export default {
         scrollRight(id){
             var scrollElem = document.getElementById('albums' + id);
             scrollElem.scroll(scrollElem.scrollLeft + 400, 0);
+        },
+        togglePopout() {
+            // this.popoutToggled = !this.popoutToggled;
+            this.$root.$emit('togglePopout');
         }
     }
 }
@@ -142,9 +158,7 @@ export default {
     }
 
     .scrollable {
-        /* height: 80vh; */
         flex: 2;
-        /* height: 100%; */
         overflow-y: scroll;
     }
 
@@ -163,6 +177,10 @@ export default {
         display: flex;
         padding: 10px;
         align-items: center;
+        /* transition: ; */
+        background: rgb(41,41,41);
+        background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(51,51,51,1) 100%);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
     }
 
     .top-nav img {
@@ -192,9 +210,19 @@ export default {
     .title {
         font-size: 3em;
         font-weight: 900;
-        margin-top: 75px;
-        margin-bottom: 50px;
+        padding-top: 75px;
+        padding-bottom: 50px;
+        
+        background: rgb(41,41,41);
+        background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(82,82,82,1) 100%);
+
+        padding-left: 25px;
         letter-spacing: 1.5px;
+
+        /* position: -webkit-sticky; 
+        position: sticky;
+        top: 0px; */
+        
     }
 
     .username {
@@ -239,5 +267,71 @@ export default {
     .arrow-left:hover, .arrow-right:hover {
         filter: brightness(0.8);
     }
+
+    .profile-arrow {
+        filter: brightness(0.5);
+        cursor: pointer;
+    }
+
+    .profile-arrow:hover {
+        filter: brightness(0.8);
+    }
+
+    .profile {
+        filter: brightness(0.5);
+        cursor: pointer;
+    }
+
+    .profile:hover {
+        filter: brightness(0.8);
+    }
+
+    .menu {
+        display: none;
+        cursor: pointer;
+        filter: brightness(0.5);
+    }
+
+    .menu:hover {
+        filter: brightness(0.8);
+    }
+
+    @media only screen and (max-width: 950px) {
+        .container {
+            height: 85vh;
+            /* height: 100%; */
+        }
+
+        .menu {
+            display: inline;
+        }
+
+        .username {
+            display: none;
+        }
+
+        .nav-left, .nav-right {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 450px) {
+        ::-webkit-scrollbar {
+            width: auto;
+            
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: auto;
+        }
+
+        .side-padding {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+
+
 
 </style>

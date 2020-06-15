@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="song-info">
+            <!-- <div class="art-spacer"></div> -->
             <div class="art" :class="{ 'hide' : !artHidden }" @mouseover="onAlbum = true" @mouseleave="onAlbum = false">
                 <img class="thumbnail" src="../assets/kanye1.jpg">
                 <div class="overlay" :class="{ 'overlay-on' : onAlbum}" >
@@ -22,7 +23,16 @@
             
         </div>
 
+        <!-- <div class="info-spacer"></div> -->
+
         <div class="player">
+            <div class="alt-song-info">
+                <span class="alt-song-title">Through the Wire</span>
+                <span> - </span>
+                <span class="alt-song-artist">Kanye West</span>
+            </div>
+
+
             <div class="progress-controls">
                 <img class="shuffle" height="15px" width="15px" src="../assets/shuffle.png">
                 <div class="control-spacer"></div>
@@ -34,6 +44,7 @@
                 <div class="control-spacer"></div>
                 <img class="repeat" height="15px" width="15px" src="../assets/repeat.png">
             </div>
+
             <div class="progress-container">
                 <div class="time-left">2:01</div>
                 <div class="progress-bar">
@@ -43,20 +54,31 @@
                 </div>
                 <div class="time-right">3:59</div>
             </div>
+
         </div>
 
         <div class="controls">
-            <img height="22px" width="22px" src="../assets/queue.png">
-            <div class="spacer"></div>
-            <img height="18px" width="18px" src="../assets/devices.png">
-            <div class="spacer"></div>
-            <img height="20px" width="20px" src="../assets/volume-high.png">
-            <div class="spacer"></div>
-            <input class="volume-slider" type="range" id="points" name="points" min="0" max="100">
-            <div class="spacer"></div>
-            <img height="18px" width="18px" src="../assets/fullscreen.png">
-            <div class="spacer"></div>
+            <div class="controls-alt">
+                <img height="20px" width="20px" src="../assets/ellipses.png">
+            </div>
+
+            <div class="controls-normal">
+                <img height="22px" width="22px" src="../assets/queue.png">
+                <div class="spacer"></div>
+                <img height="18px" width="18px" src="../assets/devices.png">
+                <div class="spacer"></div>
+                <img height="20px" width="20px" src="../assets/volume-high.png">
+                <div class="spacer"></div>
+                <input class="volume-slider" type="range" id="points" name="points" min="0" max="100">
+                <div class="spacer"></div>
+                <img height="18px" width="18px" src="../assets/fullscreen.png">
+                <div class="spacer"></div>
+            </div>
+
         </div>
+
+        
+
     </div>
 </template>
 
@@ -106,20 +128,40 @@ export default {
 
     .container {
         height: 10vh;
-        /* height: 20px; */
         width: 100vw;
         background-color: rgb(51, 51, 51);
         display: flex;
-        /* z-index: 4; */
+        flex-direction: row;
+        /* align-content: space-between; */
+        /* justify-content: space-between; */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
     }
+
+    
 
     .song-info {
         padding: 10px;
-        /* width: 200px; */
+        padding-left: 0px;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+
+        justify-content: left;
         align-items: center;
+        /* margin-right: auto; */
+        /* transition: 0.5s ease; */
+        /* margin-left: auto; */
+
+        /* width: auto; */
+        flex: 1;
+        /* align-items: flex-start; */
+    }
+
+    .has-art {
+        /* padding-left: 15px; */
+    }
+
+    .art-spacer {
+        width: 15px;
     }
 
     .player {
@@ -129,18 +171,25 @@ export default {
         justify-content: center;
         align-items: center;
         padding: 10px;
+        /* align-self: center; */
+        flex: 1;
     }
 
     .art {
         height: 60px;
         width: 60px;
-        /* margin-right: 15px;
-        margin-left: 5px; */
         display: grid;
+        flex-direction: row;
         transition: 0.2s ease-out;
         overflow: hidden;
         grid-area: 1 / 1 / 4 / 2;
         margin-right: 15px;
+        margin-left: 15px;
+        /* margin-left: 15px; */
+        /* padding-left: 10px; */
+        justify-content: right;
+        /* padding-left: 10px; */
+        /* align-items: flex-start; */
     }
 
     .thumbnail {
@@ -197,9 +246,26 @@ export default {
     .controls {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+
         padding: 10px;
+        /* margin-left: auto; */
+        align-items: center;
+        justify-content: right;
+        
+        flex: 1;
+        
+        overflow: hidden;
+        /* text-align: right; */
+
+        /* justify-self: flex-end; */
+    }
+
+    .controls-normal {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: right; */
+        align-items: center;
+        /* transition: 0.5s ease; */
     }
 
     .controls img {
@@ -213,7 +279,6 @@ export default {
 
     .heart {
         margin-left: 10px;
-        /* margin-top: 2px; */
         filter: brightness(0.7);
     }
 
@@ -244,7 +309,6 @@ export default {
         width: 100px;
         height: 5px;
         -webkit-appearance: none;
-        /* background: transparent; */
         border-radius: 25px;
         background-color: rgb(63, 63, 63);
         outline: none;
@@ -258,7 +322,6 @@ export default {
         background-color: rgb(219, 219, 219);
         border-radius: 25px;
         cursor: pointer;
-        /* visibility: hidden; */
         outline: none;
     }
 
@@ -283,9 +346,7 @@ export default {
 
     .progress-bar {
         width: 600px;
-        /* max-width: 800px; */
         flex-grow: 2;
-        /* max-width: 5; */
         height: 5px;
         background-color: rgb(63, 63, 63);
         margin-left: 10px;
@@ -346,6 +407,68 @@ export default {
         }
         to {
             opacity: 1;
+        }
+    }
+
+    .controls-alt {
+        display: none;
+        /* opacity: 0; */
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 20px;
+        filter: brightness(0.8);
+        transition: 0.5s ease;
+    }
+
+    .info-spacer {
+        display: none;
+        width: 40px;
+    }
+
+    .alt-song-info {
+        display: none;
+        margin-bottom: 15px;
+        font-size: 1em;
+    }
+   
+
+    @media only screen and (max-width: 950px) {
+        .container {
+            height: 15vh;
+        }
+
+        .progress-container {
+            display: none;
+            /* transform: translateX(-) */
+        }
+
+        .song-info {
+            display: none;
+        }
+
+        .info-spacer {
+            display: inline;
+        }
+
+        .alt-song-info {
+            display: inline;
+        }
+
+        .alt-song-title {
+            font-weight: bold;
+        }
+    }
+
+    @media only screen and (max-width: 1175px) {
+        .controls-normal {
+            /* display: none; */
+            transform: translate3d(100vh, 0, 0);
+            width: 0px;
+        }
+
+        .controls-alt {
+            display: inline;
+            /* opacity: 100%; */
         }
     }
 

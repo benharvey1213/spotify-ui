@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ 'popout' : popoutToggled }">
     <div class="main-nav">
         <div class="options"><div class="options-inner" v-on:click="options()">...</div></div>
         <div id="nav-select-0" class="main-nav-section" v-bind:class="{ 'selected': activeIndex == 0 }" v-on:click="selectNav(0)">
@@ -71,7 +71,8 @@ export default {
         return {
             activeIndex: 0,
             onAlbum: false,
-            albumHidden: false
+            albumHidden: false,
+            popoutToggled: false
         }
     },
     methods: {
@@ -84,11 +85,14 @@ export default {
         hideArt(){
             this.albumHidden = true;
             this.$root.$emit('hideArt');
-        }
+        },
     },
     mounted() {
         this.$root.$on('showArt', () => {
             this.albumHidden = false;
+        });
+        this.$root.$on('togglePopout', () => {
+            this.popoutToggled = !this.popoutToggled;
         });
     }
 }
@@ -103,6 +107,9 @@ export default {
         width: 200px;
         height: 90vh;
         background-color: rgb(29, 29, 29);
+        overflow: hidden;
+        transition: 0.2s;
+        transform-origin: left;
     }
 
     .main-nav {
@@ -325,6 +332,24 @@ export default {
         to {
             opacity: 1;
         }
+    }
+
+    @media only screen and (max-width: 950px) {
+        .sidebar {
+            transform: translate3d(-100vw, 0, 0);
+            height: 85vh;
+            width: 0px;
+        }
+
+        .preview {
+            display: none;
+        }
+
+    }
+
+    .popout {
+        transform: translate3d(0, 0, 0);
+        width: 200px;
     }
    
 
