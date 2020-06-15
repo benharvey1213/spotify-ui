@@ -255,8 +255,13 @@ export default {
     .albums {
         display: flex;
         flex-direction: row;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
+        overflow-x: scroll;
         scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+        height: 0px;
     }
 
     .arrow-left, .arrow-right {

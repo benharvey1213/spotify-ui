@@ -145,7 +145,8 @@ export default {
         display: flex;
         flex-direction: row;
 
-        justify-content: left;
+        /* justify-content: left; */
+        margin-right: auto;
         align-items: center;
         /* margin-right: auto; */
         /* transition: 0.5s ease; */
@@ -251,6 +252,7 @@ export default {
         /* margin-left: auto; */
         align-items: center;
         justify-content: right;
+
         
         flex: 1;
         
@@ -265,6 +267,7 @@ export default {
         flex-direction: row;
         /* justify-content: right; */
         align-items: center;
+        margin-left: auto;
         /* transition: 0.5s ease; */
     }
 
