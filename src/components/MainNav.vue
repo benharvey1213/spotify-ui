@@ -26,7 +26,7 @@
             
             
             <div class="subheading-with-nav">
-                <div class="subheading">Best Kanye albums</div>
+                <div class="subheading">Best Kanyeeeee albums</div>
                 <div class="expanded"></div>
                 <img @click="scrollLeft(1)" class="arrow-left" height="20px" width="20px" src="../assets/arrowup.png">
                 <div class="hor-arrow-spacing"></div>
