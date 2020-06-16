@@ -155,10 +155,7 @@ export default {
         /* width: auto; */
         flex: 1;
         /* align-items: flex-start; */
-    }
-
-    .has-art {
-        /* padding-left: 15px; */
+        min-width: 200px;
     }
 
     .art-spacer {
@@ -173,12 +170,13 @@ export default {
         align-items: center;
         padding: 10px;
         /* align-self: center; */
-        flex: 1;
+        flex: 2;
     }
 
     .art {
         height: 60px;
         width: 60px;
+        min-width: 60px;
         display: grid;
         flex-direction: row;
         transition: 0.2s ease-out;
@@ -191,6 +189,10 @@ export default {
         justify-content: right;
         /* padding-left: 10px; */
         /* align-items: flex-start; */
+    }
+
+    .info {
+        /* min-width: 100%; */
     }
 
     .thumbnail {
@@ -247,19 +249,12 @@ export default {
     .controls {
         display: flex;
         flex-direction: row;
-
         padding: 10px;
         /* margin-left: auto; */
         align-items: center;
         justify-content: right;
-
-        
         flex: 1;
-        
         overflow: hidden;
-        /* text-align: right; */
-
-        /* justify-self: flex-end; */
     }
 
     .controls-normal {
@@ -278,6 +273,24 @@ export default {
 
     .controls img:hover {
         filter: brightness(0.8);
+    }
+
+    .controls-alt {
+        display: none;
+        /* opacity: 0; */
+        
+        /* margin-left: auto; */
+
+        /* margin-top: auto; */
+        /* margin-bottom: auto; */
+        margin-right: 20px;
+        filter: brightness(0.8);
+        transition: 0.5s ease;
+    }
+
+    .controls-alt img {
+        /* margin-left: 100px; */
+        /* margin-left: 100%; */
     }
 
     .heart {
@@ -348,7 +361,9 @@ export default {
     }
 
     .progress-bar {
-        width: 600px;
+        /* width: 600px; */
+        width: 500px;
+        /* max-width: 500px; */
         flex-grow: 2;
         height: 5px;
         background-color: rgb(63, 63, 63);
@@ -411,17 +426,7 @@ export default {
         to {
             opacity: 1;
         }
-    }
-
-    .controls-alt {
-        display: none;
-        /* opacity: 0; */
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-right: 20px;
-        filter: brightness(0.8);
-        transition: 0.5s ease;
-    }
+    }    
 
     .info-spacer {
         display: none;
@@ -432,7 +437,9 @@ export default {
         display: none;
         margin-bottom: 15px;
         font-size: 1em;
+        text-align: center;
     }
+    
    
 
     @media only screen and (max-width: 950px) {
@@ -442,10 +449,13 @@ export default {
 
         .progress-container {
             display: none;
-            /* transform: translateX(-) */
         }
 
         .song-info {
+            min-width: auto;
+        }
+
+        .song-info div {
             display: none;
         }
 
@@ -460,18 +470,22 @@ export default {
         .alt-song-title {
             font-weight: bold;
         }
+
+        
     }
 
     @media only screen and (max-width: 1175px) {
         .controls-normal {
-            /* display: none; */
             transform: translate3d(100vh, 0, 0);
             width: 0px;
         }
 
         .controls-alt {
             display: inline;
-            /* opacity: 100%; */
+        }
+
+        .controls {
+            flex-direction: row-reverse;
         }
     }
 

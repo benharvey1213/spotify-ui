@@ -14,7 +14,24 @@
           <div class="username">
               <div>ben.harvey1213</div>
           </div>
-          <img class="arrow-down profile-arrow" height="20px" width="20px" src="../assets/arrowup.png">
+          <div class="dropdown">
+            <img class="arrow-down profile-arrow" height="20px" width="20px" src="../assets/arrowup.png" v-on:click="userDropdownToggled = !userDropdownToggled">
+            <div class="user-dropdown" :class="{ 'dropdown-show' : userDropdownToggled }">
+                <a href="https://www.github.com" target="_blank">
+                    <div class="dropdown-text">
+                        Check out this project on Github
+                    </div>
+                </a>
+                
+                <a href="https://www.benharvey.dev" target="_blank">
+                    <div class="dropdown-text-2">
+                        <a href="https://www.benharvey.dev" target="_blank">View the rest of my portfolio</a>
+                    </div>
+                </a>
+                
+            </div>
+          </div>
+          
       </div>
       <div class="scrollable">
 
@@ -104,11 +121,11 @@ export default {
     components: {
         AlbumArt
     },
-    // data: function() {
-    //     return {
-    //         popoutToggled: false
-    //     }
-    // },
+    data: function() {
+        return {
+            userDropdownToggled: false,
+        }
+    },
     methods: {
         scrollLeft(id){
             var scrollElem = document.getElementById('albums' + id);
@@ -299,6 +316,63 @@ export default {
 
     .menu:hover {
         filter: brightness(0.8);
+    }
+
+    /* Dropdowns */
+    .user-dropdown {
+        display: inline-block;
+        display: none;
+        position: absolute;
+        text-align: center;
+        z-index: 1;
+        background-color: rgb(65, 65, 65);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.548);
+        min-width: 250px;
+        right: 0;
+        /* padding: 20px; */
+        border-radius: 5px;
+    }
+
+    .user-dropdown a {
+        text-decoration: none;
+    }
+
+    .user-dropdown-item {
+        width: 200px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-text, .dropdown-text-2 {
+        font-size: 0.9em;
+        cursor: pointer;
+        /* padding-top: 20px; */
+        /* padding-bottom: 10px; */
+    }
+
+    .dropdown-text:hover, .dropdown-text-2:hover {
+        background-color: rgb(116, 116, 116);
+    }
+
+    .dropdown-text {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .dropdown-text-2 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .dropdown-show {
+        display: block;
     }
 
     @media only screen and (max-width: 950px) {
