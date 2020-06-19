@@ -87,6 +87,7 @@ export default {
     name: 'Player',
     mounted() {
         this.$root.$on('hideArt', () => {
+            console.log('fasdddddddd')
             this.artHidden = true;
         });
     },
@@ -229,6 +230,7 @@ export default {
 
     .hide {
         width: 0px;
+        /* display: none; */
     }
 
     .song-title {

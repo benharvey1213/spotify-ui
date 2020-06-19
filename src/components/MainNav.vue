@@ -293,6 +293,7 @@ export default {
     .profile-arrow {
         filter: brightness(0.5);
         cursor: pointer;
+        margin-top: 5px;
     }
 
     .profile-arrow:hover {
